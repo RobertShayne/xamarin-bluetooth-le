@@ -1,6 +1,6 @@
 Change log
 
-1.Port some project to .NET Core
+1.Port some project to .NET standard
 
 Please reference fork source to get more info
 

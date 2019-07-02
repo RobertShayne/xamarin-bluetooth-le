@@ -1,5 +1,7 @@
-using MvvmCross.Platform;
-using MvvmCross.Platform.Plugins;
+using MvvmCross;
+using MvvmCross.Logging;
+using MvvmCross.Plugin;
+using MvvmCross.IoC;
 using Plugin.BLE;
 using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Contracts;
@@ -9,15 +11,17 @@ namespace MvvmCross.Plugins.BLE.Droid
     public class Plugin
      : IMvxPlugin
     {
-        public Plugin()
+        private readonly IMvxLog _log;
+        public Plugin(IMvxLogProvider logProvider)
         {
-            Trace.TraceImplementation = Mvx.Trace;
+            _log = logProvider.GetLogFor<Plugin>();
+            Trace.TraceImplementation = _log.Trace;// Mvx.Trace;
         }
         public void Load()
         {
-            Mvx.Trace("Loading bluetooth low energy plugin");
-            Mvx.LazyConstructAndRegisterSingleton<IBluetoothLE>(() => CrossBluetoothLE.Current);
-            Mvx.LazyConstructAndRegisterSingleton<IAdapter>(() => Mvx.Resolve<IBluetoothLE>().Adapter);
+            _log.Trace("Loading bluetooth low energy plugin");
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IBluetoothLE>(() => CrossBluetoothLE.Current);
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IAdapter>(() => Mvx.IoCProvider.Resolve<IBluetoothLE>().Adapter);
         }
     }
 }

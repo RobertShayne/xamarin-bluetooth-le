@@ -6,14 +6,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using BLE.Client.Extensions;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
+using MvvmCross.ViewModels;
+using MvvmCross;
 using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Abstractions.Extensions;
 using Plugin.Permissions.Abstractions;
 using Plugin.Settings.Abstractions;
+using MvvmCross.Commands;
+using MvvmCross.Logging;
+using MvvmCross.Navigation;
 
 namespace BLE.Client.ViewModels
 {
@@ -87,7 +90,7 @@ namespace BLE.Client.ViewModels
 
         readonly IPermissions _permissions;
 
-        public DeviceListViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs, ISettings settings, IPermissions permissions) : base(adapter)
+        public DeviceListViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs, ISettings settings, IPermissions permissions, IMvxLog log, IMvxNavigationService navigationService) : base(adapter, log, navigationService)
         {
             _permissions = permissions;
             _bluetoothLe = bluetoothLe;
@@ -232,7 +235,8 @@ namespace BLE.Client.ViewModels
 
                     if (permissionResult.First().Value != PermissionStatus.Granted)
                     {
-                        _userDialogs.ShowError("Permission denied. Not scanning.");
+                        //_userDialogs.ShowError("Permission denied. Not scanning.");
+                        _userDialogs.Toast("Permission denied. Not scanning.");
                         return;
                     }
                 }
@@ -257,8 +261,9 @@ namespace BLE.Client.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    Mvx.Trace(ex.Message);
-                    _userDialogs.ShowError($"Failed to update RSSI for {connectedDevice.Name}");
+                    _log.Trace(ex.Message);
+                    //_userDialogs.ShowError($"Failed to update RSSI for {connectedDevice.Name}");
+                    _userDialogs.Toast($"Failed to update RSSI for {connectedDevice.Name}");
                 }
 
                 AddOrUpdateDevice(connectedDevice);
@@ -318,12 +323,14 @@ namespace BLE.Client.ViewModels
 
                         _userDialogs.HideLoading();
 
-                        _userDialogs.ShowSuccess($"RSSI updated {device.Rssi}", 1000);
+                        //_userDialogs.ShowSuccess($"RSSI updated {device.Rssi}", 1000);
+                        _userDialogs.Toast($"RSSI updated {device.Rssi}",TimeSpan.FromMilliseconds(1000));
                     }
                     catch (Exception ex)
                     {
                         _userDialogs.HideLoading();
-                        _userDialogs.ShowError($"Failed to update rssi. Exception: {ex.Message}");
+                        //_userDialogs.ShowError($"Failed to update rssi. Exception: {ex.Message}");
+                        _userDialogs.Toast($"Failed to update rssi. Exception: {ex.Message}");
                     }
                 });
 
@@ -373,7 +380,8 @@ namespace BLE.Client.ViewModels
                     await Adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token);
                 }
 
-                _userDialogs.ShowSuccess($"Connected to {device.Device.Name}.");
+                //_userDialogs.ShowSuccess($"Connected to {device.Device.Name}.");
+                _userDialogs.Toast($"Connected to {device.Device.Name}.");
 
                 PreviousGuid = device.Device.Id;
                 return true;
@@ -382,7 +390,7 @@ namespace BLE.Client.ViewModels
             catch (Exception ex)
             {
                 _userDialogs.Alert(ex.Message, "Connection error");
-                Mvx.Trace(ex.Message);
+                _log.Trace(ex.Message);
                 return false;
             }
             finally
@@ -418,7 +426,8 @@ namespace BLE.Client.ViewModels
 
                 }
 
-                _userDialogs.ShowSuccess($"Connected to {device.Name}.");
+                //_userDialogs.ShowSuccess($"Connected to {device.Name}.");
+                _userDialogs.Toast($"Connected to {device.Name}.");
 
                 var deviceItem = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
                 if (deviceItem == null)
@@ -433,7 +442,8 @@ namespace BLE.Client.ViewModels
             }
             catch (Exception ex)
             {
-                _userDialogs.ShowError(ex.Message, 5000);
+                //_userDialogs.ShowError(ex.Message, 5000);
+                _userDialogs.Toast(ex.Message,TimeSpan.FromMilliseconds(5000));
                 return;
             }
         }
@@ -461,7 +471,8 @@ namespace BLE.Client.ViewModels
                     System.Diagnostics.Debug.WriteLine($"Set Connection Interval. Result is {resultInterval}");
 
                     item.Update();
-                    _userDialogs.ShowSuccess($"Connected {item.Device.Name}");
+                    //_userDialogs.ShowSuccess($"Connected {item.Device.Name}");
+                    _userDialogs.Toast($"Connected {item.Device.Name}");
 
                     _userDialogs.HideLoading();
                     for (var i = 5; i >= 1; i--)

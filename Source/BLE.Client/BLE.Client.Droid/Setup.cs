@@ -1,20 +1,17 @@
 using Acr.UserDialogs;
 using Android.Content;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using MvvmCross;
 using Plugin.Settings;
 using Plugin.Permissions;
-using MvvmCross.Forms.Droid.Presenters;
+using MvvmCross.ViewModels;
+using MvvmCross.Presenters;
+using MvvmCross.Platforms.Android.Core;
 
 namespace BLE.Client.Droid
 {
     public class Setup : MvxAndroidSetup
     {
-        public Setup(Context applicationContext) : base(applicationContext)
+        public Setup(Context applicationContext) : base()
         {
         }
 
@@ -23,6 +20,7 @@ namespace BLE.Client.Droid
             return new BleMvxApplication();
         }
 
+        /*
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
@@ -35,6 +33,7 @@ namespace BLE.Client.Droid
             return presenter;
         }
 
+    */
         protected override void InitializeIoC()
         {
             base.InitializeIoC();

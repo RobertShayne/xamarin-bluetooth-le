@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Acr.UserDialogs;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
+using MvvmCross.ViewModels;
+using MvvmCross;
 using Plugin.BLE.Abstractions.Contracts;
+using MvvmCross.Logging;
+using MvvmCross.Navigation;
 
 namespace BLE.Client.ViewModels
 {
@@ -13,7 +15,7 @@ namespace BLE.Client.ViewModels
         private IDevice _device;
 
         public IList<IService> Services { get; private set; }
-        public ServiceListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        public ServiceListViewModel(IAdapter adapter, IUserDialogs userDialogs, IMvxLog log, IMvxNavigationService navigationService) : base(adapter,log, navigationService)
         {
             _userDialogs = userDialogs;
         }
@@ -37,7 +39,7 @@ namespace BLE.Client.ViewModels
             catch (Exception ex)
             {
                 _userDialogs.Alert(ex.Message, "Error while discovering services");
-                Mvx.Trace(ex.Message);
+                _log.Trace(ex.Message);
             }
             finally
             {

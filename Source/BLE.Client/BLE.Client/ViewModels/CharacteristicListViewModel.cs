@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Acr.UserDialogs;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Logging;
+using MvvmCross.Navigation;
+using MvvmCross.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
 
 namespace BLE.Client.ViewModels
@@ -18,7 +20,7 @@ namespace BLE.Client.ViewModels
             private set { SetProperty(ref _characteristics, value); }
         }
 
-        public CharacteristicListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        public CharacteristicListViewModel(IAdapter adapter, IUserDialogs userDialogs, IMvxLog log, IMvxNavigationService navigationService) : base(adapter, log, navigationService)
         {
             _userDialogs = userDialogs;
         }
@@ -47,7 +49,8 @@ namespace BLE.Client.ViewModels
             catch (Exception ex)
             {
                 _userDialogs.HideLoading();
-                _userDialogs.ShowError(ex.Message);
+                //_userDialogs.ShowError(ex.Message);
+                _userDialogs.Toast(ex.Message);
             }
 
 

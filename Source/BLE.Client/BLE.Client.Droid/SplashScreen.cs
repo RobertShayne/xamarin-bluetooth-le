@@ -1,7 +1,7 @@
 using Android.App;
 using Android.Content.PM;
-using MvvmCross.Droid.Views;
 using Xamarin.Forms;
+using MvvmCross.Platforms.Android.Views;
 
 namespace BLE.Client.Droid
 {
@@ -16,7 +16,7 @@ namespace BLE.Client.Droid
             : base(Resource.Layout.SplashScreen)
         {
         }
-
+        /*
         private bool _isInitializationComplete;
         public override void InitializationComplete()
         {
@@ -26,7 +26,7 @@ namespace BLE.Client.Droid
                 StartActivity(typeof(MainActivity));
             }
         }
-
+        */
         protected override void OnCreate(Android.OS.Bundle bundle)
         {
             Forms.Init(this, bundle);

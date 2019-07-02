@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.BLE", "MvvmCross.Plugins.BLE\MvvmCross.Plugins.BLE.csproj", "{83F1DFFB-A653-45DD-BE81-C02374C6DB07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.BLE", "MvvmCross.Plugins.BLE\MvvmCross.Plugins.BLE.csproj", "{83F1DFFB-A653-45DD-BE81-C02374C6DB07}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F479F7DB-CFA6-49E5-AA41-4FE6A4DA39B0} = {F479F7DB-CFA6-49E5-AA41-4FE6A4DA39B0}
 	EndProjectSection
@@ -31,12 +31,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{712770
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{A06042F5-F69D-4191-875E-5ADE9CF42075}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.BLE", "Plugin.BLE\Plugin.BLE.csproj", "{951ED11D-D026-449C-90DC-5027BC41FB3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin.BLE", "Plugin.BLE\Plugin.BLE.csproj", "{951ED11D-D026-449C-90DC-5027BC41FB3B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F479F7DB-CFA6-49E5-AA41-4FE6A4DA39B0} = {F479F7DB-CFA6-49E5-AA41-4FE6A4DA39B0}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.BLE.Abstractions", "Plugin.BLE.Abstractions\Plugin.BLE.Abstractions.csproj", "{F479F7DB-CFA6-49E5-AA41-4FE6A4DA39B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin.BLE.Abstractions", "Plugin.BLE.Abstractions\Plugin.BLE.Abstractions.csproj", "{F479F7DB-CFA6-49E5-AA41-4FE6A4DA39B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.BLE.iOS", "Plugin.BLE.iOS\Plugin.BLE.iOS.csproj", "{00F27EFE-B8A3-4FD3-BC1F-1179FA7D91B9}"
 EndProject
@@ -460,7 +460,6 @@ Global
 		{DFE97BE0-070B-43AD-BF37-50FD42B542D1}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{DFE97BE0-070B-43AD-BF37-50FD42B542D1}.Debug|x86.Build.0 = Debug|Any CPU
 		{DFE97BE0-070B-43AD-BF37-50FD42B542D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFE97BE0-070B-43AD-BF37-50FD42B542D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DFE97BE0-070B-43AD-BF37-50FD42B542D1}.Release|ARM.ActiveCfg = Release|Any CPU
 		{DFE97BE0-070B-43AD-BF37-50FD42B542D1}.Release|ARM.Build.0 = Release|Any CPU
 		{DFE97BE0-070B-43AD-BF37-50FD42B542D1}.Release|iPhone.ActiveCfg = Release|Any CPU
@@ -520,8 +519,6 @@ Global
 		{7B0E4EFD-EEB8-4CE9-9C8D-7A4BF734E9A7}.Debug|x86.Build.0 = Debug|Any CPU
 		{7B0E4EFD-EEB8-4CE9-9C8D-7A4BF734E9A7}.Debug|x86.Deploy.0 = Debug|Any CPU
 		{7B0E4EFD-EEB8-4CE9-9C8D-7A4BF734E9A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B0E4EFD-EEB8-4CE9-9C8D-7A4BF734E9A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B0E4EFD-EEB8-4CE9-9C8D-7A4BF734E9A7}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{7B0E4EFD-EEB8-4CE9-9C8D-7A4BF734E9A7}.Release|ARM.ActiveCfg = Release|Any CPU
 		{7B0E4EFD-EEB8-4CE9-9C8D-7A4BF734E9A7}.Release|ARM.Build.0 = Release|Any CPU
 		{7B0E4EFD-EEB8-4CE9-9C8D-7A4BF734E9A7}.Release|ARM.Deploy.0 = Release|Any CPU
@@ -625,5 +622,8 @@ Global
 		{DFE97BE0-070B-43AD-BF37-50FD42B542D1} = {A06042F5-F69D-4191-875E-5ADE9CF42075}
 		{7B0E4EFD-EEB8-4CE9-9C8D-7A4BF734E9A7} = {A06042F5-F69D-4191-875E-5ADE9CF42075}
 		{D0FBE2BA-799B-4071-A45D-8FB037006C9C} = {A06042F5-F69D-4191-875E-5ADE9CF42075}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDD803EF-769E-4055-8810-E89BCD33819E}
 	EndGlobalSection
 EndGlobal

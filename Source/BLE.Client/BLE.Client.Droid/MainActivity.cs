@@ -2,12 +2,13 @@ using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Forms.Droid.Presenters;
-using MvvmCross.Platform;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using MvvmCross;
+using MvvmCross.Presenters;
+using MvvmCross.Forms.Presenters;
 
 namespace BLE.Client.Droid
 {
@@ -27,10 +28,10 @@ namespace BLE.Client.Droid
             var formsApp = new BleMvxFormsApp();
             LoadApplication(formsApp);
 
-            var presenter = (MvxFormsDroidPagePresenter) Mvx.Resolve<IMvxViewPresenter>();
+            var presenter = (MvxFormsPagePresenter) Mvx.IoCProvider.Resolve<IMvxViewPresenter>();
             presenter.FormsApplication = formsApp;
 
-            Mvx.Resolve<IMvxAppStart>().Start();
+            Mvx.IoCProvider.Resolve<IMvxAppStart>().Start();
         }
     }
 }

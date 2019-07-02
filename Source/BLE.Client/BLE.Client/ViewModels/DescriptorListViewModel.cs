@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
 
 namespace BLE.Client.ViewModels
@@ -10,7 +10,7 @@ namespace BLE.Client.ViewModels
 
         public IList<IDescriptor> Descriptors { get; private set;}
 
-        public DescriptorListViewModel(IAdapter adapter) : base(adapter)
+        public DescriptorListViewModel(IAdapter adapter) : base(adapter,null,null)
         {
         }
 

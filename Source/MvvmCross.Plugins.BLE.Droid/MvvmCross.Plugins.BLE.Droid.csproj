@@ -42,12 +42,6 @@
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
-    <Reference Include="MvvmCross.Platform, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Platform.5.1.0\lib\MonoAndroid\MvvmCross.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Platform.Droid, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Platform.5.1.0\lib\MonoAndroid\MvvmCross.Platform.Droid.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,10 +53,6 @@
     <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvvmCross.Plugins.BLE\MvvmCross.Plugins.BLE.csproj">
-      <Project>{83F1DFFB-A653-45DD-BE81-C02374C6DB07}</Project>
-      <Name>MvvmCross.Plugins.BLE</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Plugin.BLE.Abstractions\Plugin.BLE.Abstractions.csproj">
       <Project>{F479F7DB-CFA6-49E5-AA41-4FE6A4DA39B0}</Project>
       <Name>Plugin.BLE.Abstractions</Name>
@@ -74,7 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BlePluginBootstrap.cs.pp" />
-    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MvvmCross">
+      <Version>6.3.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

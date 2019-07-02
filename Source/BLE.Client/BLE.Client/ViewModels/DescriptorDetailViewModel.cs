@@ -2,7 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using Acr.UserDialogs;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Commands;
+using MvvmCross.Logging;
+using MvvmCross.Navigation;
+using MvvmCross.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Abstractions.Extensions;
@@ -20,7 +23,7 @@ namespace BLE.Client.ViewModels
 
 
 
-        public DescriptorDetailViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        public DescriptorDetailViewModel(IAdapter adapter, IUserDialogs userDialogs, IMvxLog log, IMvxNavigationService navigationService) : base(adapter, log, navigationService)
         {
             _userDialogs = userDialogs;
         }
@@ -64,7 +67,8 @@ namespace BLE.Client.ViewModels
             catch (Exception ex)
             {
                 _userDialogs.HideLoading();
-                _userDialogs.ShowError(ex.Message);
+                //_userDialogs.ShowError(ex.Message);
+                _userDialogs.Toast(ex.Message);
 
                 Messages.Insert(0, $"Error {ex.Message}");
 
@@ -102,7 +106,8 @@ namespace BLE.Client.ViewModels
             catch (Exception ex)
             {
                 _userDialogs.HideLoading();
-                _userDialogs.ShowError(ex.Message);
+                //_userDialogs.ShowError(ex.Message);
+                _userDialogs.Toast(ex.Message);
             }
 
         }

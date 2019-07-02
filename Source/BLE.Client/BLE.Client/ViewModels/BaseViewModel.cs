@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
+using MvvmCross.ViewModels;
+using MvvmCross;
 using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Contracts;
+using MvvmCross.Logging;
+using MvvmCross.Navigation;
 
 namespace BLE.Client.ViewModels
 {
@@ -16,19 +18,24 @@ namespace BLE.Client.ViewModels
         protected const string CharacteristicIdKey = "CharacteristicIdNavigationKey";
         protected const string DescriptorIdKey = "DescriptorIdNavigationKey";
 
-        public BaseViewModel(IAdapter adapter)
+        internal IMvxLog _log;
+        internal IMvxNavigationService _navigationService;
+
+        public BaseViewModel(IAdapter adapter, IMvxLog log, IMvxNavigationService navigationService)
         {
+            _log = log;
+            _navigationService = navigationService;
             Adapter = adapter;
         }
 
         public virtual void Resume()
         {
-            Mvx.Trace("Resume {0}", GetType().Name);
+            _log.Trace("Resume {0}", GetType().Name);
         }
 
         public virtual void Suspend()
         {
-            Mvx.Trace("Suspend {0}", GetType().Name);
+            _log.Trace("Suspend {0}", GetType().Name);
         }
 
         protected override void InitFromBundle(IMvxBundle parameters)
@@ -84,6 +91,16 @@ namespace BLE.Client.ViewModels
 
             var descriptorId = parameters.Data[DescriptorIdKey];
             return await characteristic.GetDescriptorAsync(Guid.Parse(descriptorId));
+        }
+
+        internal void Close(IMvxViewModel model)
+        {
+            _navigationService.Close(model);
+        }
+
+        internal void ShowViewModel<T>(MvxBundle bundle) where T: IMvxViewModel
+        {
+            _navigationService.Navigate<T>(bundle);
         }
     }
 }

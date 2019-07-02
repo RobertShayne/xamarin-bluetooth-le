@@ -1,10 +1,10 @@
 using System;
 using System.Diagnostics;
-using MvvmCross.Platform.Platform;
 
 //Default
 namespace BLE.Client.Droid
 {
+    /*
     public class DebugTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)
@@ -29,4 +29,5 @@ namespace BLE.Client.Droid
             }
         }
     }
+    */
 }

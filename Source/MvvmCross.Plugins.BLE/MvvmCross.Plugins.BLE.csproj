@@ -3,8 +3,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MvvmCross.Platform">
-      <HintPath>..\packages\MvvmCross.Platform.5.1.0\lib\MonoAndroid\MvvmCross.Platform.dll</HintPath>
-    </Reference>
+    <PackageReference Include="MvvmCross" Version="6.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Plugin.BLE\Plugin.BLE.csproj" />
   </ItemGroup>
 </Project>
